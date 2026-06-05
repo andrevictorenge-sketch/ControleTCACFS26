@@ -35,7 +35,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(255, 255, 255, 0.80); /* 80% de opacidade para equilibrar o contraste */
+      background-color: rgba(255, 255, 255, 0.40); /* 40% de opacidade para equilibrar o contraste */
     }
 
     /* Área útil da tela de login */
@@ -160,12 +160,12 @@
 
   <div id="bloco-login" class="container-autenticacao">
     <div class="card-login">
-      <div class="login-titulo">Acesso ao Cronograma</div>
-      <div class="login-subtitulo">CFS 2026 - PMMG</div>
+      <div class="login-titulo">Acesso ao Cronograma de Aulas</div>
+      <div class="login-subtitulo">CFS 2026 - EFAS</div>
       
       <form onsubmit="validarAcesso(event)">
         <div class="campo-grupo">
-          <label>Utilizador / ID</label>
+          <label>Usuário / Login</label>
           <input type="text" id="usuario" placeholder="Digite seu utilizador" required>
         </div>
         
@@ -177,7 +177,7 @@
         <button type="submit" class="btn-entrar">Autenticar</button>
       </form>
 
-      <div id="erro-autenticacao" class="mensagem-erro">❌ Utilizador ou senha incorretos!</div>
+      <div id="erro-autenticacao" class="mensagem-erro">❌ Usuário ou senha incorretos!</div>
     </div>
   </div>
 
