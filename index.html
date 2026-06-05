@@ -1,11 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbxZF7e4m2LukyicgE2fYqNxYly9Gwuwg3QPyXxFH21MLcSrNObFmrS5wwoSSIKKSG8TtA/exec">
-  <title>Redirecionando...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Carga Horária - Login</title>
+  <style>
+    /* Estilização da interface de Login baseada na paleta do projeto */
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f5f6fa;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #1e272e;
+    }
+
+    .card-login {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 360px;
+      border-top: 6px solid #8c6239; /* Faixa marrom institucional */
+      text-align: center;
+    }
+
+    .login-titulo {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2f3640;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .login-subtitulo {
+      font-size: 11px;
+      color: #7f8c8d;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .campo-grupo {
+      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    .campo-grupo label {
+      font-size: 11px;
+      font-weight: bold;
+      color: #57606f;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .campo-grupo input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ced6e0;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    .campo-grupo input:focus {
+      border-color: #8c6239;
+    }
+
+    .btn-entrar {
+      width: 100%;
+      background-color: #d35400; /* Laranja padrão dos seus botões */
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+      margin-top: 10px;
+    }
+
+    .btn-entrar:hover {
+      background-color: #e67e22;
+    }
+
+    .mensagem-erro {
+      color: #c0392b;
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 15px;
+      display: none; /* Oculta por padrão */
+    }
+  </style>
 </head>
 <body>
-  <p>Caso não seja redirecionado automaticamente, <a href="https://script.google.com/macros/s/AKfycbxZF7e4m2LukyicgE2fYqNxYly9Gwuwg3QPyXxFH21MLcSrNObFmrS5wwoSSIKKSG8TtA/exec">clique aqui</a>.</p>
+
+  <div class="card-login">
+    <div class="login-titulo">Acesso ao Cronograma</div>
+    <div class="login-subtitulo">CFS 2026 - PMMG</div>
+    
+    <form id="form-login" onsubmit="validarAcesso(event)">
+      <div class="campo-grupo">
+        <label>Utilizador / ID</label>
+        <input type="text" id="usuario" placeholder="Digite o seu utilizador" required>
+      </div>
+      
+      <div class="campo-grupo">
+        <label>Senha de Acesso</label>
+        <input type="password" id="senha" placeholder="Digite a sua senha" required>
+      </div>
+      
+      <button type="submit" class="btn-entrar">Autenticar</button>
+    </form>
+
+    <div id="erro-autenticacao" class="mensagem-erro">❌ Utilizador ou senha incorretos!</div>
+  </div>
+
+  <script>
+    // Parâmetros ajustáveis de credenciais (Configuração de teste inicial)
+    const USUARIO_CORRETO = "cfs26";
+    const SENHA_CORRETA = "pmmg26";
+    const URL_DESTINO = "https://script.google.com/macros/s/AKfycbxZF7e4m2LukyicgE2fYqNxYly9Gwuwg3QPyXxFH21MLcSrNObFmrS5wwoSSIKKSG8TtA/exec";
+
+    function validarAcesso(event) {
+      event.preventDefault(); // Impede o recarregamento padrão do formulário
+      
+      const usuarioInserido = document.getElementById("usuario").value.trim();
+      const senhaInserida = document.getElementById("senha").value;
+      const erroDiv = document.getElementById("erro-autenticacao");
+
+      // Validação lógica das credenciais
+      if (usuarioInserido === USUARIO_CORRETO && senhaInserida === SENHA_CORRETA) {
+        erroDiv.style.display = "none";
+        // Redirecionamento seguro para a aplicação web executável do Google
+        window.location.href = URL_DESTINO;
+      } else {
+        // Exibe a mensagem de erro em caso de falha
+        erroDiv.style.display = "block";
+        document.getElementById("senha").value = ""; // Limpa o campo de senha por segurança
+      }
+    }
+  </script>
+
 </body>
 </html>
