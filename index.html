@@ -13,10 +13,10 @@
       height: 100%;
       font-family: 'Segoe UI', Arial, sans-serif;
       overflow: hidden;
-      background-color: #f5f6fa;
+      background-color: #000000; /* Fundo padrão preto caso a imagem demore a carregar */
     }
 
-    /* 🟢 CONTÊINER DO FUNDO ROTATIVO (Apenas na tela de login) */
+    /* CONTÊINER DO FUNDO ROTATIVO */
     .fundo-rotativo-login {
       position: fixed;
       top: 0;
@@ -27,43 +27,44 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      transition: background-image 1.8s ease-in-out; /* Transição suave entre as imagens */
+      transition: background-image 1.8s ease-in-out;
     }
 
-    /* 🟢 PELÍCULA PROTETORA CLARA: Suaviza os vetores brancos/dourados das imagens */
+    /* 🟢 PELÍCULA PROTETORA AJUSTADA: Mantém a suavidade dos vetores no fundo */
     .fundo-rotativo-login::before {
       content: '';
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(255, 255, 255, 0.75); /* Película branca com 75% de opacidade */
+      background-color: rgba(255, 255, 255, 0.80); /* 80% de opacidade para equilibrar o contraste */
     }
 
     /* Área útil da tela de login */
     .container-autenticacao {
       position: relative;
-      z-index: 1; /* Fica acima do fundo animado */
+      z-index: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
     }
 
-    /* Cartão de Login Institucional */
+    /* 🟢 MODIFICAÇÃO CIRÚRGICA: CARTÃO DE LOGIN EM TOM ESCURO (QUASE PRETO) */
     .card-login {
-      background-color: #ffffff;
+      background-color: #1e222b; /* Tom escuro grafite/preto fosco militar */
       padding: 35px;
       border-radius: 8px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
       width: 100%;
       max-width: 350px;
-      border-top: 6px solid #8c6239; /* Marrom PMMG */
+      border-top: 6px solid #8c6239; /* Linha de destaque Marrom PMMG */
       text-align: center;
     }
 
+    /* Ajuste de contraste para os textos sobre o fundo escuro */
     .login-titulo {
       font-size: 18px;
       font-weight: bold;
-      color: #2f3640;
+      color: #ffffff; /* Texto Branco */
       margin-bottom: 5px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -71,7 +72,7 @@
 
     .login-subtitulo {
       font-size: 11px;
-      color: #7f8c8d;
+      color: #a4b0be; /* Cinza claro para não ofuscar */
       margin-bottom: 25px;
       text-transform: uppercase;
       font-weight: 600;
@@ -85,16 +86,19 @@
     .campo-grupo label {
       font-size: 11px;
       font-weight: bold;
-      color: #57606f;
+      color: #dfe4ea; /* Texto das labels claro */
       text-transform: uppercase;
       display: block;
       margin-bottom: 5px;
     }
 
+    /* Ajuste nos inputs para harmonizar com a caixa preta */
     .campo-grupo input {
       width: 100%;
       padding: 10px 12px;
-      border: 1px solid #ced6e0;
+      border: 1px solid #4f5664;
+      background-color: #2f3542; /* Fundo do input levemente cinza escuro */
+      color: #ffffff; /* Texto digitado em branco */
       border-radius: 4px;
       font-size: 14px;
       box-sizing: border-box;
@@ -102,13 +106,18 @@
       transition: border-color 0.2s;
     }
 
+    /* Altera a cor do texto do placeholder (Dica interna do input) */
+    .campo-grupo input::placeholder {
+      color: #a4b0be;
+    }
+
     .campo-grupo input:focus {
-      border-color: #8c6239;
+      border-color: #8c6239; /* Destaca em marrom PMMG ao focar */
     }
 
     .btn-entrar {
       width: 100%;
-      background-color: #d35400; /* Laranja operacional */
+      background-color: #d35400;
       color: white;
       border: none;
       padding: 12px;
@@ -126,14 +135,14 @@
     }
 
     .mensagem-erro {
-      color: #c0392b;
+      color: #ff4757; /* Vermelho vivo para contraste no fundo preto */
       font-size: 12px;
       font-weight: bold;
       margin-top: 15px;
       display: none;
     }
 
-    /* Moldura Oculta do Cronograma (Ocupa a tela cheia após login) */
+    /* Moldura Oculta do Cronograma */
     #molde-conteudo {
       display: none;
       width: 100%;
@@ -175,31 +184,29 @@
   <iframe id="molde-conteudo" src=""></iframe>
 
   <script>
-    // 🟢 LINKS CONVERTIDOS DO GOOGLE DRIVE (Direct Stream Autorizado)
+    // 🟢 CORREÇÃO CIRÚRGICA: Protocolo HTTPS injetado diretamente nos links
     const IMAGENS_PMMG = [
-      "https://lh3.googleusercontent.com/d/1zMd8FC4TAgtX9S4gGOBffDt79LiPSSNu", // Imagem 8 (Viatura/Moto/Aeronave)
-      "https://lh3.googleusercontent.com/d/1rjcqzfMogqoYt_bBAmht_njL1nQZFpm_", // Imagem 7 (Prédio EFAS/Fachada)
-      "https://lh3.googleusercontent.com/d/1E9q11dAOtwpbr7NFqCGdbk207mlC97jc", // Imagem 10 (Brasão Histórico/Sigla)
-      "https://lh3.googleusercontent.com/d/1Kdlh68akDnC6nVgwDTW_LOScdroItrAJ"  // Imagem 9 (Silhueta de Militares)
+      "https://lh3.googleusercontent.com/d/1zMd8FC4TAgtX9S4gGOBffDt79LiPSSNu", // Imagem 8
+      "https://lh3.googleusercontent.com/d/1rjcqzfMogqoYt_bBAmht_njL1nQZFpm_", // Imagem 7
+      "https://lh3.googleusercontent.com/d/1E9q11dAOtwpbr7NFqCGdbk207mlC97jc", // Imagem 10
+      "https://lh3.googleusercontent.com/d/1Kdlh68akDnC6nVgwDTW_LOScdroItrAJ"  // Imagem 9
     ];
 
-    const TEMPO_ROTACAO = 300000; // 🟢 Intervalo entre transições 5 minutos
+    const TEMPO_ROTACAO = 300000; // 5 minutos de intervalo entre as trocas de imagens
     let indiceAtual = 0;
     let temporizadorFundo;
     
     const elementoFundo = document.getElementById("fundo-animado");
 
-    // Motor de transição do plano de fundo
     function rotacionarFundo() {
       elementoFundo.style.backgroundImage = `url('${IMAGENS_PMMG[indiceAtual]}')`;
       indiceAtual = (indiceAtual + 1) % IMAGENS_PMMG.length;
     }
 
-    // Inicializa a primeira imagem imediatamente e liga o relógio interno
     rotacionarFundo();
     temporizadorFundo = setInterval(rotacionarFundo, TEMPO_ROTACAO);
 
-    // Configurações de Segurança de Acesso
+    // Credenciais de Acesso e URL do Script
     const USUARIO_CORRETO = "cfs2026";
     const SENHA_CORRETA = "pmmg2026";
     const URL_REAL_SCRIPT = "https://script.google.com/macros/s/AKfycbxZF7e4m2LukyicgE2fYqNxYly9Gwuwg3QPyXxFH21MLcSrNObFmrS5wwoSSIKKSG8TtA/exec";
@@ -214,14 +221,10 @@
       if (usuarioInserido === USUARIO_CORRETO && senhaInserida === SENHA_CORRETA) {
         erroDiv.style.display = "none";
         
-        // 1. Desliga o temporizador de imagens para economizar memória e internet do usuário
         clearInterval(temporizadorFundo);
-        
-        // 2. Apaga a interface de login e o elemento de fundo da árvore visual
         document.getElementById("bloco-login").style.display = "none";
         elementoFundo.style.display = "none";
         
-        // 3. Carrega o frame do cronograma em tela cheia com URL protegida
         const iframe = document.getElementById("molde-conteudo");
         iframe.src = URL_REAL_SCRIPT;
         iframe.style.display = "block";
