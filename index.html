@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Controle de Carga Horária - CFS 2026</title>
   <style>
-    /* Estilos da Interface de Login */
+    /* Reset estrutural para garantir que o site ocupe toda a janela */
     html, body {
       margin: 0;
       padding: 0;
@@ -15,6 +15,7 @@
       font-family: 'Segoe UI', Arial, sans-serif;
     }
 
+    /* Contêiner da Tela de Login centralizada */
     .container-autenticacao {
       display: flex;
       align-items: center;
@@ -22,6 +23,7 @@
       height: 100vh;
     }
 
+    /* Cartão de Login estilizado com as cores da PMMG */
     .card-login {
       background-color: #ffffff;
       padding: 30px;
@@ -29,7 +31,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.15);
       width: 100%;
       max-width: 360px;
-      border-top: 6px solid #8c6239;
+      border-top: 6px solid #8c6239; /* Marrom institucional do cabeçalho */
       text-align: center;
     }
 
@@ -74,12 +76,12 @@
     }
 
     .campo-grupo input:focus {
-      border-color: #8c6239;
+      border-color: #8c6239; /* Borda destaca em marrom ao clicar */
     }
 
     .btn-entrar {
       width: 100%;
-      background-color: #d35400;
+      background-color: #d35400; /* Laranja dos botões de consulta */
       color: white;
       border: none;
       padding: 10px;
@@ -101,12 +103,12 @@
       font-size: 12px;
       font-weight: bold;
       margin-top: 15px;
-      display: none;
+      display: none; /* Escondido por padrão */
     }
 
-    /* Estilos do Painel Mascarado (iframe) */
+    /* Configuração da Moldura Invisível de Mascaramento */
     #molde-conteudo {
-      display: none; /* Oculto até o login ser aprovado */
+      display: none; /* Fica oculto até a validação da senha */
       width: 100%;
       height: 100%;
       border: none;
@@ -118,7 +120,7 @@
 </head>
 <body>
 
-  <!-- Bloco Inicial: Tela de Login -->
+  <!-- ELEMENTO 1: BLOCO DE LOGIN VISÍVEL INICIALMENTE -->
   <div id="bloco-login" class="container-autenticacao">
     <div class="card-login">
       <div class="login-titulo">Acesso ao Cronograma</div>
@@ -142,17 +144,18 @@
     </div>
   </div>
 
-  <!-- Bloco Secundário: Moldura Oculta que Carregará o Link Real -->
+  <!-- ELEMENTO 2: MOLDURA DO IFRAME (MASCARADOR DE URL) -->
   <iframe id="molde-conteudo" src=""></iframe>
 
   <script>
-    // Configurações de Credenciais e URL Alvo
+    // PARÂMETROS AJUSTÁVEIS: Definição de credenciais e link estável executável
     const USUARIO_CORRETO = "cfs2026";
     const SENHA_CORRETA = "pmmg2026";
     const URL_REAL_SCRIPT = "https://script.google.com/macros/s/AKfycbxZF7e4m2LukyicgE2fYqNxYly9Gwuwg3QPyXxFH21MLcSrNObFmrS5wwoSSIKKSG8TtA/exec";
 
+    // Mecanismo de validação e troca dinâmica de interface
     function validarAcesso(event) {
-      event.preventDefault();
+      event.preventDefault(); // Impede o envio tradicional do formulário
       
       const usuarioInserido = document.getElementById("usuario").value.trim();
       const senhaInserida = document.getElementById("senha").value;
@@ -161,16 +164,17 @@
       if (usuarioInserido === USUARIO_CORRETO && senhaInserida === SENHA_CORRETA) {
         erroDiv.style.display = "none";
         
-        // 1. Esconde a tela de login removendo-a do fluxo visual
+        // 1. Oculta completamente o formulário de login da janela
         document.getElementById("bloco-login").style.display = "none";
         
-        // 2. Alimenta a moldura iframe com a URL real do script do Google
+        // 2. Injeta o link real executável dentro da propriedade 'src' da moldura
         const iframe = document.getElementById("molde-conteudo");
         iframe.src = URL_REAL_SCRIPT;
         
-        // 3. Ativa a exibição do iframe ocupando toda a tela do navegador
+        // 3. Exibe o frame ocupando a área total do navegador mantendo a URL original
         iframe.style.display = "block";
       } else {
+        // Se as credenciais falharem, exibe alerta e limpa o campo de senha
         erroDiv.style.display = "block";
         document.getElementById("senha").value = "";
       }
